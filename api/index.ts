@@ -3,7 +3,7 @@ import axios from "axios";
 import dotenv from "dotenv";
 import cors from "cors";
 
-import { planets } from "./data";
+import { planets } from "../data";
 
 const PORT = process.env.PORT || 3000;
 
@@ -11,7 +11,14 @@ dotenv.config();
 const app = express();
 app.use(cors());
 
-app.get("/planets", async (req, res) => {
+app.get("/api", (req, res) => {
+	const path = `/api/planets`;
+	res.setHeader("Content-Type", "text/html");
+	res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+	res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
+});
+
+app.get("/api/planets", async (req, res) => {
 	const offset = Number(req.query.offset || 0);
 
 	if (offset <= 270) {
