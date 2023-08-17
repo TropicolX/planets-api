@@ -2,6 +2,7 @@ import express from "express";
 import axios from "axios";
 import dotenv from "dotenv";
 import cors from "cors";
+
 import { planets } from "./data";
 
 const PORT = process.env.PORT || 3000;
